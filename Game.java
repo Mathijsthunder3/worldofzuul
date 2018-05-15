@@ -14,7 +14,7 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
-
+//hiha hentai
 public class Game 
 {
     private Parser parser;
@@ -56,6 +56,7 @@ public class Game
     /**
      *  Main play routine.  Loops until end of play.
      */
+    
     public void play() 
     {            
         printWelcome();
@@ -83,19 +84,8 @@ public class Game
         System.out.println();
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
-        if(currentRoom.northExit != null) {
-            System.out.print("north ");
-        }
-        if(currentRoom.eastExit != null) {
-            System.out.print("east ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("south ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("west ");
-        }
-        System.out.println();
+        
+       printLocationInfo();
     }
 
     /**
@@ -141,7 +131,22 @@ public class Game
         System.out.println("Your command words are:");
         System.out.println("   go quit help");
     }
-
+    private void printLocationInfo()
+   {
+       if(currentRoom.northExit != null) {
+                System.out.print("north ");
+            }
+       if(currentRoom.eastExit != null) {
+                System.out.print("east ");
+            }
+      if(currentRoom.southExit != null) {
+                System.out.print("south ");
+            }
+      if(currentRoom.westExit != null) {
+                System.out.print("west ");
+            }
+      System.out.println();
+    }
     /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
@@ -178,19 +183,7 @@ public class Game
             currentRoom = nextRoom;
             System.out.println("You are " + currentRoom.getDescription());
             System.out.print("Exits: ");
-            if(currentRoom.northExit != null) {
-                System.out.print("north ");
-            }
-            if(currentRoom.eastExit != null) {
-                System.out.print("east ");
-            }
-            if(currentRoom.southExit != null) {
-                System.out.print("south ");
-            }
-            if(currentRoom.westExit != null) {
-                System.out.print("west ");
-            }
-            System.out.println();
+            printLocationInfo();
         }
     }
 
