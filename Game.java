@@ -14,7 +14,6 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
-//hiha hentai
 public class Game 
 {
     private Parser parser;
@@ -133,18 +132,10 @@ public class Game
     }
     private void printLocationInfo()
    {
-       if(currentRoom.northExit != null) {
-                System.out.print("north ");
-            }
-       if(currentRoom.eastExit != null) {
-                System.out.print("east ");
-            }
-      if(currentRoom.southExit != null) {
-                System.out.print("south ");
-            }
-      if(currentRoom.westExit != null) {
-                System.out.print("west ");
-            }
+      System.out.println(currentRoom.getExits().get("north"));
+      System.out.println(currentRoom.getExits().get("south"));
+      System.out.println(currentRoom.getExits().get("east"));
+      System.out.println(currentRoom.getExits().get("west"));
       System.out.println();
     }
     /** 

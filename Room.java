@@ -1,3 +1,7 @@
+
+
+
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -12,6 +16,7 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
+import java.util.HashMap;
 public class Room 
 {
     public String description;
@@ -19,6 +24,7 @@ public class Room
     public Room southExit;
     public Room eastExit;
     public Room westExit;
+    private HashMap<String,Room> exits;
 
     /**
      * Create a room described "description". Initially, it has
@@ -26,9 +32,14 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
+    public Room getDir(String direction)
+    {
+        return exits.get(direction);
+    }
     public Room(String description) 
     {
         this.description = description;
+        exits = new HashMap<String,Room>();
     }
 
     /**
@@ -39,8 +50,18 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
+    public HashMap getExits(){
+        return exits;
+    }
     public void setExits(Room north, Room east, Room south, Room west) 
     {
+        
+        exits.put("north",north);
+        exits.put("east",east);
+        exits.put("west",west);
+        exits.put("south",south);
+        
+        /**
         if(north != null) {
             northExit = north;
         }
@@ -53,6 +74,7 @@ public class Room
         if(west != null) {
             westExit = west;
         }
+        */
     }
 
     /**
