@@ -14,7 +14,7 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
-//hiha hentai
+
 public class Game 
 {
     private Parser parser;
@@ -133,26 +133,27 @@ public class Game
     }
     private void printLocationInfo()
    {
-       if(currentRoom.northExit != null) {
+      if(currentRoom.getExit("north") != null) {
                 System.out.print("north ");
-            }
-       if(currentRoom.eastExit != null) {
+      }
+      if(currentRoom.getExit("east") != null) {
                 System.out.print("east ");
-            }
-      if(currentRoom.southExit != null) {
+      }
+      if(currentRoom.getExit("south") != null) {
                 System.out.print("south ");
-            }
-      if(currentRoom.westExit != null) {
+      }
+      if(currentRoom.getExit("west") != null) {
                 System.out.print("west ");
-            }
+      }
       System.out.println();
     }
-    /** 
+    
+   /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    private void goRoom(Command command) 
-    {
+   private void goRoom(Command command) 
+   {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
@@ -163,17 +164,17 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
+        if(direction.equals("north")){
+            nextRoom = currentRoom.getExit("north");
         }
-        if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
+        if(direction.equals("east")){
+            nextRoom = currentRoom.getExit("east");
         }
-        if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
+        if(direction.equals("south")){
+            nextRoom = currentRoom.getExit("south");
         }
-        if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
+        if(direction.equals("west")){
+            nextRoom = currentRoom.getExit("west");
         }
 
         if (nextRoom == null) {
@@ -185,15 +186,15 @@ public class Game
             System.out.print("Exits: ");
             printLocationInfo();
         }
-    }
+   }
 
-    /** 
+   /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
      */
-    private boolean quit(Command command) 
-    {
+   private boolean quit(Command command) 
+   {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
@@ -201,5 +202,5 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
-    }
+   }
 }
