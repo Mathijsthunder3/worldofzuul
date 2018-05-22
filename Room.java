@@ -17,6 +17,7 @@
  * @version 2016.02.29
  */
 import java.util.HashMap;
+import java.util.ArrayList;
 public class Room 
 {
 
@@ -26,14 +27,33 @@ public class Room
     private Room southExit;
     private Room eastExit;
     private Room westExit;
+    private int itemweight;
+    private String itemdescription;
+    private ArrayList items;
+    private boolean visited;
     
     /**
      * returns north or east or south or west
      */
-    
+    public boolean isVisited(){
+        return visited;
+    }
+    public Room(){
+        visited=false;
+        items= new ArrayList<Item>();
+    }
     /**
      * returns north or east or south or west
      */
+    public void addItem(Item item){
+        items.add(item);
+    }
+    public ArrayList getItems(){
+        return items;
+    }
+    public void removeItem(int i){
+        items.remove(i);
+    }
     public Room getExit(String direction)
     {
         if(direction == "north")
@@ -83,6 +103,8 @@ public class Room
         return exits;
     }
    
+    
+   
     public void setExits(Room north, Room east, Room south, Room west) 
     {
         if(north !=null){
@@ -97,21 +119,6 @@ public class Room
     if(south !=null){
         exits.put("south",south);
     }
-        
-        /**
-        if(north != null) {
-            northExit = north;
-        }
-        if(east != null) {
-            eastExit = east;
-        }
-        if(south != null) {
-            southExit = south;
-        }
-        if(west != null) {
-            westExit = west;
-        }
-        */
     }
 
     /**

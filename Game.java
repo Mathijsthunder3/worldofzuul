@@ -14,20 +14,46 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
-
+import java.util.ArrayList;
 public class Game 
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private int maxGewicht;
+    private ArrayList pItems;
+    private Item zwaard;
+    private Item schild;
+    private Item healPotion;
+    private Item kaart;
+    private Item boog;
+    private Item pijl;
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        maxGewicht=100;
         createRooms();
         parser = new Parser();
+        pItems= new ArrayList<Item>();
+        addItems();
     }
+    public void addItems(){
+        zwaard = new Item(15,"het zwaard van je mama");
+        pItems.add(zwaard);
+        schild = new Item(30,"het schild van je mama");
+        pItems.add(schild);
+        healPotion = new Item(5, "het herlevingsdrankje");
+        pItems.add(healPotion);
+        kaart = new Item(20, "maakt het mogelijk terug te lopen");
+        pItems.add(kaart);
+        boog = new Item(15, "om de monstertjes een beetje pijn te doen");
+        pItems.add(boog);
+        pijl = new Item(2, "iedere 2 gewicht van dit item is een pijl");
+        pItems.add(pijl);
+        
+    }
+    
 
     /**
      * Create all the rooms and link their exits together.
@@ -197,9 +223,21 @@ public class Game
             System.out.println("You are " + currentRoom.getDescription());
             System.out.print("Exits: ");
             printLocationInfo();
+            if(nextRoom.isVisited()==false){
+                roomItems();
+            }
         }
    }
+   public int randomNumber(int max){
+       return(int)(Math.random() * max) + 0;
+    }
+   public void roomItems(){
+       int i = pItems.size()/
+       int aantalItems = randomNumber(i);
+       if(aantalItems >3){
+        }
 
+   }
    /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
