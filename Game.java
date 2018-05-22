@@ -14,6 +14,7 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
+
 public class Game 
 {
     private Parser parser;
@@ -140,6 +141,18 @@ public class Game
     private void printLocationInfo()
    {
     System.out.println(currentRoom.getExits().keySet());
+      if(currentRoom.getExit("north") != null) {
+                System.out.print("north ");
+      }
+      if(currentRoom.getExit("east") != null) {
+                System.out.print("east ");
+      }
+      if(currentRoom.getExit("south") != null) {
+                System.out.print("south ");
+      }
+      if(currentRoom.getExit("west") != null) {
+                System.out.print("west ");
+      }
       System.out.println();
     }
     
@@ -161,15 +174,19 @@ public class Game
         Room nextRoom = null;
         if(direction.equals("north")){
             nextRoom = currentRoom.getDir("north");
+            nextRoom = currentRoom.getExit("north");
         }
         if(direction.equals("east")){
             nextRoom = currentRoom.getDir("east");
+            nextRoom = currentRoom.getExit("east");
         }
         if(direction.equals("south")){
             nextRoom = currentRoom.getDir("south");
+            nextRoom = currentRoom.getExit("south");
         }
         if(direction.equals("west")){
             nextRoom = currentRoom.getDir("west");
+            nextRoom = currentRoom.getExit("west");
         }
 
         if (nextRoom == null) {

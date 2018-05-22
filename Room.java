@@ -32,6 +32,30 @@ public class Room
      */
     
     /**
+     * returns north or east or south or west
+     */
+    public Room getExit(String direction)
+    {
+        if(direction == "north")
+        {
+            return northExit; 
+        }
+        else if(direction == "east")
+        {
+            return eastExit;
+        }
+        else if(direction == "south")
+        {
+            return southExit;
+        }
+        else if(direction == "west")
+        {
+            return westExit;
+        }
+        return null;
+    }
+    
+    /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
