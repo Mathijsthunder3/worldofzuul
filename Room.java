@@ -19,13 +19,18 @@
 import java.util.HashMap;
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    private HashMap<String,Room> exits;
 
+    private HashMap<String,Room> exits;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    
+    /**
+     * returns north or east or south or west
+     */
+    
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -53,13 +58,21 @@ public class Room
     public HashMap getExits(){
         return exits;
     }
+   
     public void setExits(Room north, Room east, Room south, Room west) 
     {
-        
+        if(north !=null){
         exits.put("north",north);
+    }
+    if(east !=null){
         exits.put("east",east);
+    }
+    if(west !=null){
         exits.put("west",west);
+    }
+    if(south !=null){
         exits.put("south",south);
+    }
         
         /**
         if(north != null) {
