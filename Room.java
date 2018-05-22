@@ -1,3 +1,7 @@
+
+
+
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -12,17 +16,44 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
+import java.util.HashMap;
+import java.util.ArrayList;
 public class Room 
 {
+
+    private HashMap<String,Room> exits;
     private String description;
     private Room northExit;
     private Room southExit;
     private Room eastExit;
     private Room westExit;
+    private int itemweight;
+    private String itemdescription;
+    private ArrayList items;
+    private boolean visited;
     
     /**
      * returns north or east or south or west
      */
+    public boolean isVisited(){
+        return visited;
+    }
+    public Room(){
+        visited=false;
+        items= new ArrayList<Item>();
+    }
+    /**
+     * returns north or east or south or west
+     */
+    public void addItem(Item item){
+        items.add(item);
+    }
+    public ArrayList getItems(){
+        return items;
+    }
+    public void removeItem(int i){
+        items.remove(i);
+    }
     public Room getExit(String direction)
     {
         if(direction == "north")
@@ -50,9 +81,14 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
+    public Room getDir(String direction)
+    {
+        return exits.get(direction);
+    }
     public Room(String description) 
     {
         this.description = description;
+        exits = new HashMap<String,Room>();
     }
 
     /**
@@ -63,20 +99,26 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
+    public HashMap getExits(){
+        return exits;
+    }
+   
+    
+   
     public void setExits(Room north, Room east, Room south, Room west) 
     {
-        if(north != null) {
-            northExit = north;
-        }
-        if(east != null) {
-            eastExit = east;
-        }
-        if(south != null) {
-            southExit = south;
-        }
-        if(west != null) {
-            westExit = west;
-        }
+        if(north !=null){
+        exits.put("north",north);
+    }
+    if(east !=null){
+        exits.put("east",east);
+    }
+    if(west !=null){
+        exits.put("west",west);
+    }
+    if(south !=null){
+        exits.put("south",south);
+    }
     }
 
     /**

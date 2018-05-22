@@ -16,22 +16,48 @@ import java.util.Stack;
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
-
+import java.util.ArrayList;
 public class Game 
 {
-   private Parser parser;
-   private Room currentRoom;
-   private Stack<Room> previousRooms;
-   /**
-    * Create the game and initialise its internal map.
-    */
-   public Game() 
-   {
-       createRooms();
-       parser = new Parser();
-       previousRooms = new Stack<>();
-   }
-     
+    private Parser parser;
+    private Room currentRoom;
+    private int maxGewicht;
+    private ArrayList pItems;
+    private Item zwaard;
+    private Item schild;
+    private Item healPotion;
+    private Item kaart;
+    private Item boog;
+    private Item pijl;
+    /**
+     * Create the game and initialise its internal map.
+     */
+    public Game() 
+    {
+        maxGewicht=100;
+        createRooms();
+        parser = new Parser();
+        pItems= new ArrayList<Item>();
+        addItems();
+        parser = new Parser();
+        previousRooms = new Stack<>();
+    }
+    public void addItems(){
+        zwaard = new Item(15,"het zwaard van je mama");
+        pItems.add(zwaard);
+        schild = new Item(30,"het schild van je mama");
+        pItems.add(schild);
+        healPotion = new Item(5, "het herlevingsdrankje");
+        pItems.add(healPotion);
+        kaart = new Item(20, "maakt het mogelijk terug te lopen");
+        pItems.add(kaart);
+        boog = new Item(15, "om de monstertjes een beetje pijn te doen");
+        pItems.add(boog);
+        pijl = new Item(2, "iedere 2 gewicht van dit item is een pijl");
+        pItems.add(pijl);
+        
+    }
+  
    /**
     * Goes back to the previous room
     */
@@ -40,11 +66,12 @@ public class Game
         currentRoom = previousRooms.pop();
    }
     
-   /**
-    * Create all the rooms and link their exits together.
-    */
-   private void createRooms()
-   {
+
+    /**
+     * Create all the rooms and link their exits together.
+     */
+    private void createRooms()
+    {
         Room outside, theater, pub, lab, office;
       
         // create the rooms
@@ -131,30 +158,36 @@ public class Game
         {
             back();
         }
+        else if (commandWord.equals("look")){
+            getLongDescription();
+        }
 
         return wantToQuit;
    }
 
     // implementations of user commands:
 
-   /**
-    * Print out some help information.
-    * Here we print some stupid, cryptic message and a list of the 
-    * command words.
-    */
-   private void printHelp() 
-   {
+    /**
+     * Print out some help information.
+     * Here we print some stupid, cryptic message and a list of the 
+     * command words.
+     */
+    private void getLongDescription(){
+        
+    }
+        
+    private void printHelp() 
+    {
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
-   }
-   
-   private void printLocationInfo()
+        parser.getCommandWords().showCommands();
+    }
+    private void printLocationInfo()
    {
-      if(currentRoom.getExit("north") != null)
-      {
+    System.out.println(currentRoom.getExits().keySet());
+      if(currentRoom.getExit("north") != null) {
                 System.out.print("north ");
       }
       if(currentRoom.getExit("east") != null)
@@ -189,20 +222,20 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;
-        if(direction.equals("north"))
-        {
+        if(direction.equals("north")){
+            nextRoom = currentRoom.getDir("north");
             nextRoom = currentRoom.getExit("north");
         }
-        if(direction.equals("east"))
-        {
+        if(direction.equals("east")){
+            nextRoom = currentRoom.getDir("east");
             nextRoom = currentRoom.getExit("east");
         }
-        if(direction.equals("south"))
-        {
+        if(direction.equals("south")){
+            nextRoom = currentRoom.getDir("south");
             nextRoom = currentRoom.getExit("south");
         }
-        if(direction.equals("west"))
-        {
+        if(direction.equals("west")){
+            nextRoom = currentRoom.getDir("west");
             nextRoom = currentRoom.getExit("west");
         }
 
@@ -216,9 +249,21 @@ public class Game
             System.out.println("You are " + currentRoom.getDescription());
             System.out.print("Exits: ");
             printLocationInfo();
+            if(nextRoom.isVisited()==false){
+                roomItems();
+            }
         }
    }
+   public int randomNumber(int max){
+       return(int)(Math.random() * max) + 0;
+    }
+   public void roomItems(){
+       int i = pItems.size()/
+       int aantalItems = randomNumber(i);
+       if(aantalItems >3){
+        }
 
+   }
    /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
