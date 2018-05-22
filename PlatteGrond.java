@@ -7,6 +7,9 @@
  */
 public class PlatteGrond
 {
+    /**
+     * Laat een mapje van de universiteit verschijnen.
+     */
     public void verschijn(){
         System.out.println("                                      **************     *****************************     ******************"); 
         System.out.println("                                      * Campus Pub * --- * outside of the university * --- *lecture theater *                                                       ");
